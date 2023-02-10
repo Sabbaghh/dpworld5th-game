@@ -16,9 +16,9 @@ export function middleware(request) {
 		if (slug === 'login') {
 			return NextResponse.redirect(new URL('/progress', request.url));
 		} else {
-			if (stages && stages[slug].completed) {
+			if (stages && stages[slug]?.completed) {
 				return NextResponse.redirect(
-					new URL(`/scanerror/${stages[slug].title}`, request.url),
+					new URL(`/scanerror/${stages[slug]?.title}`, request.url),
 				);
 			} else {
 				return NextResponse.redirect(
@@ -35,20 +35,20 @@ export function middleware(request) {
 			return NextResponse.redirect(new URL(`/login`, request.url));
 		}
 		if (url.includes('/questions') || url.includes('/progress/info')) {
-			if (stages && stages[slug].completed) {
+			if (stages && stages[slug]?.completed) {
 				return NextResponse.redirect(
-					new URL(`/scanerror/${stages[slug].title}`, request.url),
+					new URL(`/scanerror/${stages[slug]?.title}`, request.url),
 				);
 			}
 		}
 		if (url.includes('/direct')) {
 			console.log(
-				'stages && stages[slug].direct_points',
-				stages && stages[slug].direct_points,
+				'stages && stages[slug]?.direct_points',
+				stages && stages[slug]?.direct_points,
 			);
-			if (stages && stages[slug].direct_points) {
+			if (stages && stages[slug]?.direct_points) {
 				return NextResponse.redirect(
-					new URL(`/scanerror/${stages[slug].title}`, request.url),
+					new URL(`/scanerror/${stages[slug]?.title}`, request.url),
 				);
 			}
 		}

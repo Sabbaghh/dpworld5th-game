@@ -15,7 +15,12 @@ function direct() {
                 token: token,
                 stage_id: slug,
                 points: points
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
+            console.log(data)
             router.push('/progress');
         } catch (error) {
             console.log(error)
