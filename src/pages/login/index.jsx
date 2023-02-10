@@ -53,7 +53,7 @@ const Login = () => {
 				data: { token },
 			} = authKey;
 			//set token in cookies
-			Cookies.set('token', token);
+			Cookies.set('token', token, { expires: 30 });
 			router.push(`/progress`);
 		} catch (error) {
 			console.log(error);

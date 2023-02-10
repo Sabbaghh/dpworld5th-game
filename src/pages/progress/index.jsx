@@ -6,7 +6,6 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import Loader from '@/Components/Loader';
 import Header from '@/Components/Header';
-import Elements from '@/Components/Elements';
 
 function progress() {
 	const [loading, setLoading] = useState(true);
@@ -20,9 +19,10 @@ function progress() {
 			setData(data.stages);
 			const stages = {};
 			let finished = true;
+			console.log(data.stages)
 			data.stages.forEach((element) => {
 				finished = finished && element.completed && element.direct_points;
-				stages[element.id] = {
+				stages[element.slug] = {
 					completed: element.completed,
 					title: element.title,
 					direct_points: element.direct_points,
@@ -32,7 +32,7 @@ function progress() {
 				setFinished(true);
 			}
 			// store data in cookies
-			Cookies.set('stages', JSON.stringify(stages));
+			Cookies.set('stages', JSON.stringify(stages), { expires: 30 });
 		} catch (error) {
 			console.log(error);
 		}

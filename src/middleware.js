@@ -8,6 +8,7 @@ export function middleware(request) {
 	const token = request.cookies.get('token')?.value;
 	let stages = request.cookies.get('stages')?.value;
 	stages = stages ? JSON.parse(stages) : null;
+	console.log(stages);
 
 	let url = request.url;
 	if (url.includes('/login') && token) {
@@ -42,10 +43,6 @@ export function middleware(request) {
 			}
 		}
 		if (url.includes('/direct')) {
-			console.log(
-				'stages && stages[slug]?.direct_points',
-				stages && stages[slug]?.direct_points,
-			);
 			if (stages && stages[slug]?.direct_points) {
 				return NextResponse.redirect(
 					new URL(`/scanerror/${stages[slug]?.title}`, request.url),
