@@ -6,6 +6,10 @@ import SubmitButton from '../../Components/SubmitButton';
 import Divider from '../../Components/Divider';
 import Loader from '../../Components/Loader';
 import axios from 'axios';
+import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
+import Header from '@/Components/Header';
+import Elements from '@/Components/Elements';
 const Login = () => {
 	const [user, setUser] = useState({
 		name: '',
@@ -19,6 +23,9 @@ const Login = () => {
 	const onEmailChange = (e) => {
 		setUser({ ...user, email: e.target.value });
 	};
+
+	const router = useRouter();
+	const { slug } = router.query;
 	const onLogin = async () => {
 		if (
 			!(
@@ -28,25 +35,34 @@ const Login = () => {
 		) {
 			console.log('error');
 			setError(true);
+			return;
 		}
 
 		setLoading(true);
 		try {
-
-			const authKey = await axios.post('https://oplus.dev/apps/dw_game/api/login', user, {
-				headers: {
-					'Content-Type': 'application/json',
+			const authKey = await axios.post(
+				'https://oplus.dev/apps/dw_game/api/login',
+				user,
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
 				},
-			});
-			const { data:{token} } = authKey;
+			);
+			const {
+				data: { token },
+			} = authKey;
 			//set token in cookies
-			document.cookie = `token=${token}`;
-			
-		} catch (error) {}
+			Cookies.set('token', token);
+			router.push(`/progress`);
+		} catch (error) {
+			console.log(error);
+		}
 		setLoading(false);
 	};
 	return (
 		<Container>
+			<Header title='DP WORLD | LOGIN' />
 			{loading ? <Loader /> : null}
 			<Head>
 				<title>Login</title>
@@ -55,7 +71,7 @@ const Login = () => {
 			<Divider />
 			<InputContainer>
 				<Text>Name</Text>
-				<Input onChange={onNameChange} type='text' placeholder='Abdullah' />
+				<Input onChange={onNameChange} type='text' placeholder='' />
 			</InputContainer>
 			<Divider />
 			<InputContainer>
@@ -63,7 +79,7 @@ const Login = () => {
 				<Input
 					onChange={onEmailChange}
 					type='email'
-					placeholder='Abdullah@dpworld.com'
+					placeholder=''
 				/>
 			</InputContainer>
 			<Divider />
@@ -72,6 +88,7 @@ const Login = () => {
 			{error ? (
 				<Text color='red'>Please enter a valid email and name</Text>
 			) : null}
+			<Elements/>
 		</Container>
 	);
 };
@@ -83,6 +100,7 @@ const Container = styled.div`
 	justify-content: center;
 	height: 100vh;
 	background-color: #35224c;
+	overflow: hidden;
 `;
 const InputContainer = styled.div`
 	display: flex;

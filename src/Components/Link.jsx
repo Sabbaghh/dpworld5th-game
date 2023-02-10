@@ -13,6 +13,7 @@ function LinkBetweenPages({ children, href='/scan' }) {
 				padding: '10px 30px',
 				cursor: 'pointer',
 				width: '70%',
+				textDecoration:'none'
 			}}
 			href={href}
 		>
