@@ -88,7 +88,7 @@ const Login = () => {
 			{error ? (
 				<Text color='red'>Please enter a valid email and name</Text>
 			) : null}
-			<Elements/>
+			{/* <Elements/> */}
 		</Container>
 	);
 };
