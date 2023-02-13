@@ -6,20 +6,24 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import Loader from '@/Components/Loader';
 import Header from '@/Components/Header';
+import { useRouter } from 'next/router';
 
 function progress() {
 	const [loading, setLoading] = useState(true);
 	const [data, setData] = useState([]);
 	const [finished, setFinished] = useState(false);
+	const [score , setScore] = useState(0)
+	const router = useRouter();
 	const getData = async (token) => {
 		try {
 			const { data } = await axios.get(
 				`https://oplus.dev/apps/dw_game/api/all-stages/${token}`,
 			);
+			const {data:{score}} = await axios.get(`https://oplus.dev/apps/dw_game/api/client/${token}`)
+			setScore(score)
 			setData(data.stages);
 			const stages = {};
 			let finished = true;
-			console.log(data.stages)
 			data.stages.forEach((element) => {
 				finished = finished && element.completed && element.direct_points;
 				stages[element.slug] = {
@@ -34,7 +38,11 @@ function progress() {
 			// store data in cookies
 			Cookies.set('stages', JSON.stringify(stages), { expires: 30 });
 		} catch (error) {
-			console.log(error);
+			if( error.response.status === 401){
+				Cookies.remove('token');
+				Cookies.remove('stages');
+				router.push(`/login`);
+			}
 		}
 		setLoading(false);
 	};
@@ -48,6 +56,11 @@ function progress() {
 	}, []);
 	return (
 		<Containers>
+			<div style={{position:'absolute', top:'5px', left:'3px', opacity:'0.5'}}>
+				<p style={{fontSize:'12px', color:'#fff', textAlign:'start'}}>
+					Your Score: {score}
+				</p>
+			</div>
 			<Header title='DP WORLD | Progress' />
 			<div
 				style={{

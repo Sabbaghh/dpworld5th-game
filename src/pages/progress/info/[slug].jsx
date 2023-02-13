@@ -16,7 +16,6 @@ function info() {
 				const res = await axios.get(
 					`https://oplus.dev/apps/dw_game/api/stage/${slug}`,
 				);
-				console.log(res.data.stage)
 				setData(res.data.stage);
 			}
 			setLoading(false);

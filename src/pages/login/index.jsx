@@ -9,7 +9,6 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import Header from '@/Components/Header';
-import Elements from '@/Components/Elements';
 const Login = () => {
 	const [user, setUser] = useState({
 		name: '',
