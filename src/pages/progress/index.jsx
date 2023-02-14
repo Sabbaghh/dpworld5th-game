@@ -56,9 +56,9 @@ function progress() {
 	}, []);
 	return (
 		<Containers>
-			<div style={{position:'absolute', top:'5px', left:'3px', opacity:'0.5'}}>
-				<p style={{fontSize:'12px', color:'#fff', textAlign:'start'}}>
-					Your Score: {score}
+			<div style={{position:'absolute', top:'5px', left:'3px'}}>
+				<p style={{fontSize:'15px', color:'#fff', textAlign:'start'}}>
+					Your Score is: {score}
 				</p>
 			</div>
 			<Header title='DP WORLD | Progress' />
