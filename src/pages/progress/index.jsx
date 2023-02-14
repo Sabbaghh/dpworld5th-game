@@ -39,9 +39,9 @@ function progress() {
 			Cookies.set('stages', JSON.stringify(stages), { expires: 30 });
 		} catch (error) {
 			if( error.response.status === 401){
-				Cookies.remove('token');
-				Cookies.remove('stages');
-				router.push(`/login`);
+				//Cookies.remove('token');
+				//Cookies.remove('stages');
+				//router.push(`/login`);
 			}
 		}
 		setLoading(false);
