@@ -9,10 +9,10 @@ function direct() {
     const router = useRouter()
     const {slug, points} = router.query;
     const handleDirectPoints = async () => {
-        const token2 = Cookies.get('token2');
+        const token3 = Cookies.get('token3');
         try {
             const {data} = await axios.post(`https://oplus.dev/apps/dw_game/api/stage-complete`, {
-                token: token2,
+                token: token3,
                 stage_id: slug,
                 points: points
             }, {
