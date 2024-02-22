@@ -45,7 +45,7 @@ const questions = () => {
 			setShowSubmit(false);
 		} else {
 			// router.push('/progress')
-			const token3 = Cookies.get('token3');
+			const token4 = Cookies.get('token4');
 			console.log(selectedAnswer);
 			const question = [];
 			for (let key in selectedAnswer) {
@@ -55,7 +55,7 @@ const questions = () => {
 				});
 			}
 			const body = {
-				token: token3,
+				token: token4,
 				stage_slug: slug,
 				questions: question,
 			};
