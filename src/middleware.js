@@ -60,6 +60,6 @@ export const config = {
 		'/login/:path*',
 		'/progress/:path*',
 		'/questions/:path*',
-		'/direct/:path*',
+		'/ddpworldpoints/:path*',
 	],
 };
