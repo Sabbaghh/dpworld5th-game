@@ -4,14 +4,14 @@ import { NextRequest } from 'next/server';
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
-	//get token5 form local storage
-	const token5 = request.cookies.get('token5')?.value;
+	//get token6 form local storage
+	const token6 = request.cookies.get('token6')?.value;
 	let stages = request.cookies.get('stages')?.value;
 	stages = stages ? JSON.parse(stages) : null;
 	console.log(stages);
 
 	let url = request.url;
-	if (url.includes('/login') && token5) {
+	if (url.includes('/login') && token6) {
 		let pathArr = request.nextUrl.pathname.split('/');
 		let slug = pathArr[pathArr.length - 1];
 		if (slug === 'login') {
@@ -32,7 +32,7 @@ export function middleware(request) {
 	if (!url.includes('/login')) {
 		let pathArr = request.nextUrl.pathname.split('/');
 		let slug = pathArr[pathArr.length - 1];
-		if (!token5) {
+		if (!token6) {
 			return NextResponse.redirect(new URL(`/login`, request.url));
 		}
 		if (url.includes('/questions') || url.includes('/progress/info')) {
