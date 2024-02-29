@@ -13,12 +13,12 @@ function progress() {
 	const [finished, setFinished] = useState(false);
 	const [score , setScore] = useState(0)
 	const router = useRouter();
-	const getData = async (token6) => {
+	const getData = async (token7) => {
 		try {
 			const { data } = await axios.get(
-				`https://oplus.dev/apps/dw_game/api/all-stages/${token6}`,
+				`https://oplus.dev/apps/dw_game/api/all-stages/${token7}`,
 			);
-			const {data:{score}} = await axios.get(`https://oplus.dev/apps/dw_game/api/client/${token6}`)
+			const {data:{score}} = await axios.get(`https://oplus.dev/apps/dw_game/api/client/${token7}`)
 			setScore(score)
 			setData(data.stages);
 			const stages = {};
@@ -48,9 +48,9 @@ function progress() {
 
 	useEffect(() => {
 		// get token form Cookies
-		const token6 = Cookies.get('token6');
-		if (token6) {
-			getData(token6);
+		const token7 = Cookies.get('token7');
+		if (token7) {
+			getData(token7);
 		}
 	}, []);
 	return (
